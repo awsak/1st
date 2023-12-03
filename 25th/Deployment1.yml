@@ -1,0 +1,27 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-deployment
+  labels:
+    types: db
+    author: abhi
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      types: db
+  templates:
+    metadata:
+      name: mysql-pod
+      labels:
+        name: db
+    spec:
+      containers:
+        - name: mydb
+          image: mysql
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: abhi
+...
