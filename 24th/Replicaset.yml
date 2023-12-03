@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Replicaset
+metadata:
+  name: tomcat-rc
+  labels:
+    type: appserver
+    author: Abhi
+
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      types: appserver
+
+  template:
+    metadata:
+      name: tomcat-pod
+      labels:
+        types: appserver
+    spec:
+      containers:
+        - name: mytomcat
+          image: tomee
+          ports:
+            - containerPort: 8080
+              hostPort: 9090
